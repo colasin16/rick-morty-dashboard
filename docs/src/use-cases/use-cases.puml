@@ -1,0 +1,12 @@
+@startuml UseCases
+left to right direction
+
+actor User
+
+usecase GetCharacters
+usecase AddToFavourites
+
+User --> GetCharacters
+User --> AddToFavourites
+
+@enduml

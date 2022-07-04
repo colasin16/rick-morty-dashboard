@@ -1,0 +1,14 @@
+@startuml domain model
+class Dashboard
+class User
+class Character
+class FavouritesList
+
+Dashboard --> User
+Dashboard o--> Character: 0..1
+
+User *--> FavouritesList
+
+FavouritesList o--> Character
+
+@enduml
