@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import httpStatus from "http-status";
 import { injectable } from "inversify";
-import { DomainError } from "../../../contexts/_core/domain/DomainError";
+import { DomainErrorConstructor } from "../../../contexts/_core/domain/errors/DomainErrorContructor";
 
 @injectable()
 export abstract class ExpressMiddleware {
-  private readonly errors: Map<DomainError, { status: number; message?: string }> = new Map();
+  private readonly errors: Map<DomainErrorConstructor, { status: number; message?: string }> =
+    new Map();
 
   async prevent(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -23,9 +24,9 @@ export abstract class ExpressMiddleware {
     }
   }
 
-  protected abstract run(req: Request, res?: Response): void | Promise<void>;
+  protected abstract run(req: Request, res: Response): any | Promise<any>;
 
-  protected addError(domainError: DomainError, status: number, message?: string) {
+  protected addError(domainError: DomainErrorConstructor, status: number, message?: string) {
     this.errors.set(domainError, { status, message });
   }
 }

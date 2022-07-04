@@ -5,5 +5,5 @@ export const USER_LOGIN_PATH = "/login";
 
 export const register = (app: any) => {
   const userLoginController = container.get(UserLoginController);
-  app.get(USER_LOGIN_PATH, userLoginController.request.bind(userLoginController));
+  app.post(USER_LOGIN_PATH, userLoginController.request.bind(userLoginController));
 };

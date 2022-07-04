@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { injectable } from "inversify";
-import { DomainError } from "../../../contexts/_core/domain/DomainError";
+import { DomainErrorConstructor } from "../../../contexts/_core/domain/errors/DomainErrorContructor";
 
 @injectable()
 export abstract class ExpressController {
-  private readonly errors: Map<DomainError, { status: number; message?: string }> = new Map();
+  private readonly errors: Map<DomainErrorConstructor, { status: number; message?: string }> =
+    new Map();
 
   async request(req: Request, res: Response): Promise<void> {
     res.header("Access-Control-Allow-Origin", "*");
@@ -27,7 +28,7 @@ export abstract class ExpressController {
 
   protected abstract run(req: Request, res: Response): any | Promise<any>;
 
-  protected addError(domainError: DomainError, status: number, message?: string) {
+  protected addError(domainError: DomainErrorConstructor, status: number, message?: string) {
     this.errors.set(domainError, { status, message });
   }
 }
