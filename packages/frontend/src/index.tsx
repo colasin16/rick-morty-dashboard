@@ -1,18 +1,23 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
+import "reflect-metadata";
+import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import App from "./App";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
+import "./index.css";
+import { Router } from "./app/routes";
 
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+const container = document.getElementById("root")!;
+const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
