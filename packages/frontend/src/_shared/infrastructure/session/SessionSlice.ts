@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../../app/store";
 import { User } from "../../domain/user/User";
 
 interface SessionSlice {
@@ -20,6 +21,8 @@ export const sessionSlice = createSlice({
     },
   },
 });
+
+export const selectUserLoggedIn = (state: RootState) => !!state.session.token;
 
 export const { setSession } = sessionSlice.actions;
 export default sessionSlice.reducer;
