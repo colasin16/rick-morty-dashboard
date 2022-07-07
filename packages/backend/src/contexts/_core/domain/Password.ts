@@ -1,13 +1,19 @@
 import { hashSync, compareSync } from "bcrypt";
 
 export class Password {
-  private readonly hash: string;
+  private hash: string;
 
   constructor(rawPassword: string) {
     this.hash = this.encrypt(rawPassword);
   }
 
-  encrypt(rawPassword: string) {
+  static fromHash(hash: string) {
+    const password = new Password("");
+    password.hash = hash;
+    return password;
+  }
+
+  private encrypt(rawPassword: string) {
     const saltRounds = 10;
     return hashSync(rawPassword, saltRounds);
   }

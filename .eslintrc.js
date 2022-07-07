@@ -1,32 +1,27 @@
 module.exports = {
-  "env": {
-    "node": true,
-    "es6": true,
-    "mocha": true,
-    "jest": true
+  env: {
+    node: true,
+    es6: true,
+    mocha: true,
+    jest: true,
   },
-  "extends": [
+  extends: [
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "tsconfig.json",
-    "sourceType": "module",
-    "createDefaultProgram": true,
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "tsconfig.json",
+    sourceType: "module",
+    createDefaultProgram: true,
   },
-  "plugins": [
-    "@typescript-eslint",
-    "@typescript-eslint/tslint"
-  ],
-  "ignorePatterns": [
-    "node_modules/",
-    "dist"
-  ],
-  "rules": {
+  plugins: ["@typescript-eslint", "@typescript-eslint/tslint"],
+  ignorePatterns: ["node_modules/", "dist"],
+  rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-this-alias": "warn",
     "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/unbound-method": "warn",
@@ -44,14 +39,8 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-floating-promises": "error",
 
-    "eqeqeq": [
-      "error",
-      "smart"
-    ],
-    "max-classes-per-file": [
-      "error",
-      1
-    ],
+    eqeqeq: ["error", "smart"],
+    "max-classes-per-file": ["error", 1],
     "max-len": "off",
     "new-parens": "error",
     "no-bitwise": "error",
@@ -71,28 +60,27 @@ module.exports = {
     "no-unused-expressions": "error",
     "no-unused-labels": "error",
     "object-shorthand": "error",
-    "one-var": [
-      "error",
-      "never"
-    ],
-    "radix": "error",
+    "one-var": ["error", "never"],
+    radix: "error",
     "spaced-comment": "error",
     "use-isnan": "error",
     "valid-typeof": "off",
     "@typescript-eslint/tslint/config": [
       "error",
       {
-        "rules": {
+        rules: {
           "jsdoc-format": true,
-          "no-reference-import": true
-        }
-      }
+          "no-reference-import": true,
+        },
+      },
     ],
   },
-  "overrides": [{
-    "files": ["*.test.ts"],
-    "rules": {
-      "@typescript-eslint/camelcase": "off"
-    }
-  }]
+  overrides: [
+    {
+      files: ["*.test.ts"],
+      rules: {
+        "@typescript-eslint/camelcase": "off",
+      },
+    },
+  ],
 };

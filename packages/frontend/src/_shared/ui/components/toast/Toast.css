@@ -1,0 +1,35 @@
+.toast-container {
+  font-size: 14px;
+  box-sizing: border-box;
+  position: fixed;
+}
+
+.toast {
+  height: 50px;
+  width: 365px;
+  padding: 20px 15px 10px 10px;
+}
+
+.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  transition: transform 0.6s ease-in-out;
+  animation: toast-in-right 0.7s;
+}
+
+.type-error {
+  background-color: rgba(255, 93, 93, 0.679);
+}
+
+.type-success {
+  background-color: rgba(93, 255, 112, 0.679);
+}
+
+@keyframes toast-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

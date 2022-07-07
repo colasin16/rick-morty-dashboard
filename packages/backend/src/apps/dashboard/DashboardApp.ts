@@ -5,7 +5,7 @@ export class Dashboard {
   private server?: Server;
 
   async start() {
-    const port = process.env.PORT || "3000";
+    const port = process.env.PORT || "8080";
     this.server = new Server(port);
     await this.server.listen();
   }

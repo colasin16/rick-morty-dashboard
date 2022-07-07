@@ -13,11 +13,12 @@ export class UserLoginController extends ExpressController {
   constructor(@inject(UserFinder) private readonly userFinder: UserFinder) {
     super();
     this.addError(UnknownUserError, httpStatus.NOT_FOUND);
-    this.addError(WrongPasswordError, httpStatus.OK);
+    this.addError(WrongPasswordError, httpStatus.UNAUTHORIZED);
   }
 
   protected async run(req: Request, _res: Response) {
     const user = await this.userFinder.findByUsername(req.body.username);
+
     if (!user.password.matches(req.body.password)) {
       throw new WrongPasswordError(undefined, "Wrong password");
     }
@@ -27,6 +28,7 @@ export class UserLoginController extends ExpressController {
 
   private toResponse(user: User) {
     return {
+      user: { id: user.toPrimitives().id, username: user.toPrimitives().name },
       token: jwt.sign({ userId: user.id.toString() }, process.env.TOKEN_SECRET!, {
         expiresIn: "24h",
       }),

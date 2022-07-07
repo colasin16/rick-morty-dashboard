@@ -10,7 +10,7 @@ export class User {
   ) {}
 
   static fromPrimitives(primitives: UserPrimitives) {
-    const password = new Password(primitives.password);
+    const password = Password.fromHash(primitives.password);
     return new User(new Uuid(primitives.id), primitives.name, password);
   }
 
