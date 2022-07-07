@@ -16,6 +16,10 @@ export class AuthenticateUserMiddleware extends ExpressMiddleware {
     const authHeader = req.headers.authorization;
     const token = (authHeader && authHeader.split(" ")[1]) ?? "";
 
-    jwt.verify(token, process.env.TOKEN_SECRET as string);
+    try {
+      jwt.verify(token, process.env.TOKEN_SECRET as string);
+    } catch (error) {
+      throw new UnauthorizedUserError(undefined, `Unauthorized User: ${error.message}`);
+    }
   }
 }

@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import { inject, injectable } from "inversify";
+import assert from "assert";
 import { UserFinder } from "../../../contexts/dashboard/user/application/UserFinder";
 import { UnknownUserError } from "../../../contexts/dashboard/user/domain/errors/UnknownUserError";
 import { User } from "../../../contexts/dashboard/user/domain/User";
@@ -19,9 +20,10 @@ export class UserLoginController extends ExpressController {
   protected async run(req: Request, _res: Response) {
     const user = await this.userFinder.findByUsername(req.body.username);
 
-    if (!user.password.matches(req.body.password)) {
-      throw new WrongPasswordError(undefined, "Wrong password");
-    }
+    assert(
+      !user.password.matches(req.body.password),
+      new WrongPasswordError(undefined, "Wrong password")
+    );
 
     return this.toResponse(user);
   }
