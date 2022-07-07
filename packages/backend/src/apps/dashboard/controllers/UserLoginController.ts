@@ -13,7 +13,7 @@ export class UserLoginController extends ExpressController {
   constructor(@inject(UserFinder) private readonly userFinder: UserFinder) {
     super();
     this.addError(UnknownUserError, httpStatus.NOT_FOUND);
-    this.addError(WrongPasswordError, httpStatus.OK);
+    this.addError(WrongPasswordError, httpStatus.UNAUTHORIZED);
   }
 
   protected async run(req: Request, _res: Response) {

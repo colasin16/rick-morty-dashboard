@@ -22,3 +22,4 @@ export const sessionSlice = createSlice({
 });
 
 export const { setSession } = sessionSlice.actions;
+export default sessionSlice.reducer;

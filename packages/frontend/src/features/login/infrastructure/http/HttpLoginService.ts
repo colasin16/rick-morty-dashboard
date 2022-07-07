@@ -1,6 +1,7 @@
 import { LoginService } from "../../domain/LoginService";
 import { LoginData } from "../../domain/LoginData";
 import { User } from "../../../../_shared/domain/user/User";
+import { ResponseHandler } from "../../../../_shared/infrastructure/http/ResponseHandler";
 
 export class HttpLoginService implements LoginService {
   private readonly serviceDomain = "http://localhost:8080";
@@ -14,6 +15,6 @@ export class HttpLoginService implements LoginService {
       body: JSON.stringify(loginData),
     });
 
-    return await response.json();
+    return await ResponseHandler.handle(response);
   }
 }
