@@ -10,7 +10,7 @@ export class UserFinder {
 
   async findByUsername(username: string) {
     const user = await this.repository.findByUsername(username);
-    assert(user, new UnknownUserError(user?.id.toString()));
+    assert(user, new UnknownUserError(user?.id.toString(), `User ${username} does not exist`));
     return user;
   }
 }

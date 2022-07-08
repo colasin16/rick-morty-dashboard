@@ -14,7 +14,7 @@ export class User {
     return new User(new Uuid(primitives.id), primitives.name, password);
   }
 
-  public toPrimitives() {
+  public toPrimitives(): UserPrimitives {
     return {
       id: this.id.toString(),
       name: this.name,
