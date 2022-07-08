@@ -8,8 +8,11 @@ interface SessionSlice {
 }
 
 const initialState: SessionSlice = {
-  user: { id: "", username: "" },
-  token: "",
+  user: {
+    id: localStorage.getItem("userId") ?? "",
+    username: localStorage.getItem("username") ?? "",
+  },
+  token: localStorage.getItem("token") ?? "",
 };
 
 export const sessionSlice = createSlice({
@@ -23,6 +26,6 @@ export const sessionSlice = createSlice({
 });
 
 export const selectUserLoggedIn = (state: RootState) => !!state.session.token;
-
+export const userAuthToken = (state: RootState) => state.session.token;
 export const { setSession } = sessionSlice.actions;
 export default sessionSlice.reducer;

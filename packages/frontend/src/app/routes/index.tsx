@@ -1,23 +1,22 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { LoginPage } from "../../features/login/ui/pages/LoginPage";
-import { selectUserLoggedIn } from "../../_shared/infrastructure/session/SessionSlice";
 import App from "../../_shared/ui/pages/App";
-import { useAppSelector } from "../hooks";
+import { RequireAuth } from "./RequireAuth";
 
 export const Router = () => {
-  const isUserAuthenticated = useAppSelector(selectUserLoggedIn);
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        {isUserAuthenticated ? (
-          <>
-            <Route path="/dashboard" element={<App />} />
-          </>
-        ) : (
-          <Route path="/" element={<LoginPage />} />
-        )}
+        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <App />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

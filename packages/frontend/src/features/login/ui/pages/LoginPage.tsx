@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../../logo.svg";
 import "../../../../App.css";
@@ -19,8 +19,12 @@ export const LoginPage = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
     try {
       const session = await loginer.login({ username, password });
+      localStorage.setItem("token", session.token);
+      localStorage.setItem("userId", session.user.id);
+      localStorage.setItem("username", session.user.username);
       dispatch(setSession(session));
       navigate("/dashboard");
     } catch (error) {
@@ -40,7 +44,7 @@ export const LoginPage = () => {
           </label>
           <label>
             Password:
-            <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </label>
           <input type="submit" value="Submit" />
         </form>
